@@ -1,5 +1,12 @@
+import sys
+from pathlib import Path
+
+ROOT_DIR = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT_DIR))
+
 import streamlit as st
 from datetime import datetime
+
 
 from src.parsing.resume_parser import parse_resume
 from src.generate.matcher import calculate_match_score
