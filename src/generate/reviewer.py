@@ -4,13 +4,15 @@ from google import genai
 from src.config import GEMINI_API_KEY, GEMINI_MODEL
 
 
-# --------------------------------
-# Initialize Gemini Client
-# --------------------------------
+def get_gemini_client():
+    api_key = GEMINI_API_KEY
 
-client = genai.Client(
-    api_key=GEMINI_API_KEY
-)
+    if not api_key:
+        raise ValueError("GEMINI_API_KEY is missing.")
+
+    api_key = api_key.strip()
+
+    return genai.Client(api_key=api_key)
 
 
 def review_resume(resume_text, job_description):
@@ -20,7 +22,6 @@ def review_resume(resume_text, job_description):
     # --------------------------------
 
     if not resume_text or not resume_text.strip():
-
         return """
 ### ⚠️ AI Review Error
 
@@ -29,7 +30,6 @@ for AI review.
 """
 
     if not job_description or not job_description.strip():
-
         return """
 ### ⚠️ AI Review Error
 
@@ -37,14 +37,12 @@ Please provide a job description before generating
 the AI resume review.
 """
 
-
     # --------------------------------
     # Limit Very Large Input
     # --------------------------------
 
     resume_text = resume_text[:20000]
     job_description = job_description[:12000]
-
 
     # --------------------------------
     # Create Prompt
@@ -85,60 +83,45 @@ IMPORTANT RULES:
 - Keep the response professional and useful.
 """
 
-
-    # --------------------------------
-    # Retry Configuration
-    # --------------------------------
-
     max_attempts = 3
-
     last_error = None
 
+    # Create client when the function is actually called
+    try:
+        client = get_gemini_client()
+    except Exception as e:
+        print(f"Gemini client initialization failed: {e}")
+        return """
+## ⚠️ AI Review Temporarily Unavailable
+
+The Gemini API configuration could not be initialized.
+Please check the API key configuration.
+"""
 
     # --------------------------------
     # Call Gemini with Retry
     # --------------------------------
 
     for attempt in range(max_attempts):
-
         try:
-
             response = client.models.generate_content(
                 model=GEMINI_MODEL,
                 contents=prompt,
             )
 
-
-            # --------------------------------
-            # Validate Gemini Response
-            # --------------------------------
-
             if response is None:
+                raise RuntimeError("Gemini returned an empty response.")
 
-                raise RuntimeError(
-                    "Gemini returned an empty response."
-                )
-
-
-            response_text = getattr(
-                response,
-                "text",
-                None
-            )
-
+            response_text = getattr(response, "text", None)
 
             if not response_text or not response_text.strip():
-
                 raise RuntimeError(
                     "Gemini returned a response without text."
                 )
 
-
             return response_text
 
-
         except Exception as e:
-
             last_error = str(e)
 
             print(
@@ -147,23 +130,9 @@ IMPORTANT RULES:
                 f"{last_error}"
             )
 
-
-            # --------------------------------
-            # Retry if attempts remain
-            # --------------------------------
-
             if attempt < max_attempts - 1:
-
                 wait_time = 3 * (attempt + 1)
-
                 time.sleep(wait_time)
-
-                continue
-
-
-    # --------------------------------
-    # Fallback After All Retries Fail
-    # --------------------------------
 
     return """
 ## ⚠️ AI Review Temporarily Unavailable
