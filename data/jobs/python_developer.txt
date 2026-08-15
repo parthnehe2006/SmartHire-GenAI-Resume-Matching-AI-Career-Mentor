@@ -1,0 +1,19 @@
+Job Title: Python Developer Intern
+
+We are looking for a Python Developer Intern with knowledge of
+Python, SQL, REST APIs, Flask, FastAPI, Git and GitHub.
+
+Responsibilities:
+- Develop Python applications
+- Build REST APIs
+- Work with databases
+- Write clean and maintainable code
+
+Requirements:
+- Python
+- SQL
+- REST API
+- Flask
+- FastAPI
+- Git
+- GitHub

@@ -1,0 +1,24 @@
+Job Title: Generative AI Intern
+
+We are looking for a Generative AI Intern with knowledge of Python,
+Machine Learning, Generative AI, Large Language Models, LangChain,
+FAISS, embeddings and REST APIs.
+
+Responsibilities:
+- Build Generative AI applications
+- Work with Large Language Models
+- Develop RAG pipelines
+- Implement semantic search
+- Work with vector databases
+- Build REST APIs
+
+Requirements:
+- Python
+- Machine Learning
+- Generative AI
+- LLM
+- LangChain
+- FAISS
+- Embeddings
+- REST API
+- Git and GitHub

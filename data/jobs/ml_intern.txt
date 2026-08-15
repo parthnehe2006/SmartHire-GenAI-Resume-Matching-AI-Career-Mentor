@@ -1,0 +1,20 @@
+Job Title: Machine Learning Intern
+
+We are looking for a Machine Learning Intern with knowledge of
+Python, Machine Learning, Deep Learning, NumPy, Pandas,
+Scikit-learn and TensorFlow.
+
+Responsibilities:
+- Build machine learning models
+- Process datasets
+- Perform data analysis
+- Train and evaluate ML models
+
+Requirements:
+- Python
+- Machine Learning
+- Deep Learning
+- NumPy
+- Pandas
+- Scikit-learn
+- TensorFlow

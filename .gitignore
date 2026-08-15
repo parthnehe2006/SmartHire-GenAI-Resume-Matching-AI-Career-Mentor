@@ -1,0 +1,32 @@
+# Environment variables / secrets
+.env
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# IDE files
+.vscode/
+.idea/
+
+# Temporary files
+temp_resume.pdf
+*.tmp
+
+# Personal resumes / private data
+data/resumes/
+current_resume.pdf
+temp_resume.pdf
+sample_resume.pdf
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Generated reports
+reports/
